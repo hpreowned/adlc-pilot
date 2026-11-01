@@ -241,3 +241,12 @@ repo is the durable continuation.
 and all 1859 files under `results/`: zero hits (one scrubber test fixture excluded).
 **Correction.** `org/kestrel-project` was called a separate repo in conversation; it is
 a tracked directory of the pilot. Six repos, not seven.
+
+### 2026-11-01 — repos moved to `hpreowned` (owner's call); VidurAI pushes blocked
+**Decision.** All six repos recreated public under `hpreowned` and pushed there; raw-runs
+release re-cut there; bootstrap default owner and `TRANSFER.md` updated. The `VidurAI`
+copies were left in place, not deleted (destructive; owner decides).
+**Why.** GitHub refused every push from `VidurAI` with "You must verify your email
+address" after the repos went public; the Mac's git keychain credential is `hpreowned`.
+**Verified.** `make bootstrap` from a fresh public clone: 5 inner clones, 387 run dirs from
+the release, 73 kit tests, doctor green on all four Kestrel repos.

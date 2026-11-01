@@ -3,7 +3,7 @@
 # Pins: Copilot CLI 1.0.105, .NET SDK 8.0 + runtime 10.0 (Roslyn LS), JDK 21, kit v0.1.5.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
-GH_OWNER="${ADLC_GH_OWNER:-VidurAI}"
+GH_OWNER="${ADLC_GH_OWNER:-hpreowned}"
 RUNS_TAG="${ADLC_RUNS_TAG:-runs-2026-11-01}"
 cd "$ROOT"
 

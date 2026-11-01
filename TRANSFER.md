@@ -2,7 +2,7 @@
 
 Six git repos, one tarball, one optional chat transcript. Everything else is rebuilt.
 
-## Repos (all public, github.com/VidurAI)
+## Repos (all public, github.com/hpreowned)
 
 | repo | lands at | what it is |
 |---|---|---|
@@ -19,7 +19,7 @@ The five inner repos are gitignored by the pilot so each keeps its own history.
 ## Restore
 
 ```bash
-git clone https://github.com/VidurAI/adlc-pilot.git ~/ADLC
+git clone https://github.com/hpreowned/adlc-pilot.git ~/ADLC
 cd ~/ADLC && make bootstrap
 ```
 
