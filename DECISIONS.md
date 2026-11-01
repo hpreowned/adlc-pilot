@@ -250,3 +250,15 @@ copies were left in place, not deleted (destructive; owner decides).
 address" after the repos went public; the Mac's git keychain credential is `hpreowned`.
 **Verified.** `make bootstrap` from a fresh public clone: 5 inner clones, 387 run dirs from
 the release, 73 kit tests, doctor green on all four Kestrel repos.
+
+### 2026-11-01 — `make tier3` would have skipped the nine runs it exists to redo
+**Found.** web-008's nine quota-killed Tier 3 records sit in `2026-10-30-tier3.jsonl` with
+exit 1 and no answer. The scorecard already excluded them (378 valid = 411 − 24 flagged −
+9 exit-1), but `adlc eval`'s resume set skipped any run_id present in the file, valid or
+not. "Re-run resumes" was false for exactly the case it was written for.
+**Fix.** Kit main (post-0.1.5): resume skips only records that pass the scorecard's
+`is_valid`; invalid records stay in the file as history. Test added (74 tests).
+**Cost of the pending reruns, estimated from web-006/web-007 Tier 3 runs.** 9 agent runs
++ 9 judge calls ≈ 18 premium requests; ≈ 2.0M prompt tokens (baseline ≈ 110k, graphify
+≈ 300k, federated ≈ 265k per run, mostly cache reads), ≈ 30k output tokens, ≈ 7 min
+sequential wall. Copilot bills premium requests, not tokens.
