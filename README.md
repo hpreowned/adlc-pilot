@@ -8,6 +8,6 @@ Proves (or disproves) a repo-context layer for GitHub Copilot and packages it as
 - `results/` — every number in the report, reproducible by `make all`.
 - `DECISIONS.md` — every call made without asking. `DECISION_ADR.md` — the decision + rollout plan.
 
-Move to another Mac: `TRANSFER.md` (six private repos + one release tarball; `make bootstrap`).
+Move to another Mac: `TRANSFER.md` (six public repos + one release tarball; `make bootstrap`).
 
 Reproduce: `make kit org init doctor baseline federate tasks tier1 scorecard` (or `make all`).

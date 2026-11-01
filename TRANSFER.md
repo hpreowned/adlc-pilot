@@ -2,7 +2,7 @@
 
 Six git repos, one tarball, one optional chat transcript. Everything else is rebuilt.
 
-## Repos (all private, github.com/VidurAI)
+## Repos (all public, github.com/VidurAI)
 
 | repo | lands at | what it is |
 |---|---|---|
