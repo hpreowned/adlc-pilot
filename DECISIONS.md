@@ -262,3 +262,24 @@ not. "Re-run resumes" was false for exactly the case it was written for.
 + 9 judge calls ≈ 18 premium requests; ≈ 2.0M prompt tokens (baseline ≈ 110k, graphify
 ≈ 300k, federated ≈ 265k per run, mostly cache reads), ≈ 30k output tokens, ≈ 7 min
 sequential wall. Copilot bills premium requests, not tokens.
+
+### 2026-11-01 — the kit was never installable outside this checkout; fixed in 0.1.7
+**Found** while answering "how to consume this kit". Two defects, both invisible to the
+pilot because every kit command ran from the editable venv:
+1. `ADOPT.md` step 0 and all six reusable workflows installed from the fictional
+   `kestrel-freight/adlc-kit`. Fixed in 0.1.6 (URL → `hpreowned/adlc-kit`, rendered into
+   onboarded repos from `pins.json`).
+2. `uv tool install` of any tag v0.1.0–v0.1.6 produced a CLI that died on
+   `ModuleNotFoundError: harness`: the wheel shipped `harness` as data under `adlc/_data/`
+   while `eval`, `regress`, `scorecard` import it as a top-level package. Fixed in 0.1.7:
+   `harness` is a wheel package, `harness_dir()` resolves by import. 0.1.6 also shipped a
+   `PINS.md` saying `adlc==0.1.5` because the lock was not refreshed before `adlc pins`.
+**Guard.** `tests/test_wheel_install.py` builds the wheel, installs it into a clean venv,
+runs `adlc init` on a scratch repo and asserts the rendered workflow URL. 75 tests. CI runs it.
+**Verified.** `uv tool install git+https://github.com/hpreowned/adlc-kit@v0.1.7` into an
+empty tool dir: 1 s; `adlc init` on a fresh Python repo writes 11 files; `adlc doctor`
+all green; `adlc lint` OK; `adlc stale` reports STALE until `adlc baseline`.
+**Repos.** All four Kestrel repos re-inited on 0.1.7 (3 files each: workflow, renovate,
+AGENTS kit stamp), lint OK, pushed.
+**Lesson for the ADR.** "Adoption ≤ 15 min" was measured with the kit on `sys.path`. An
+adoption test that does not start from `uv tool install` of the tag is not an adoption test.

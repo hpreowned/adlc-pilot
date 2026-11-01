@@ -7,7 +7,7 @@ Six git repos, one tarball, one optional chat transcript. Everything else is reb
 | repo | lands at | what it is |
 |---|---|---|
 | `adlc-pilot` | `~/ADLC` (any path works) | harness, tasks, arms, results, scorecard, DECISIONS, ADR, report |
-| `adlc-kit` | `adlc-kit/` | the `adlc` CLI and templates; tagged `v0.1.5` |
+| `adlc-kit` | `adlc-kit/` | the `adlc` CLI and templates; tagged `v0.1.7` |
 | `kestrel-services` | `repos/kestrel-services/` | Java (booking) + Python (gateway) + C# (pricing) test subject |
 | `kestrel-web` | `repos/kestrel-web/` | TypeScript test subject |
 | `kestrel-ops` | `repos/kestrel-ops/` | ops test subject |
