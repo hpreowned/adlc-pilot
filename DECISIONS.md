@@ -283,3 +283,21 @@ all green; `adlc lint` OK; `adlc stale` reports STALE until `adlc baseline`.
 AGENTS kit stamp), lint OK, pushed.
 **Lesson for the ADR.** "Adoption ≤ 15 min" was measured with the kit on `sys.path`. An
 adoption test that does not start from `uv tool install` of the tag is not an adoption test.
+
+### 2026-11-02 — Backstage documentation as an independent repo (`adlc-backstage`)
+**Decision.** TechDocs + catalog entities + a scaffolder template, in their own repo, not in the
+kit. The kit stays the source of truth: `scripts/sync.sh` mirrors ADOPT, ROUTING, RUNBOOK,
+INSTALL_MINUTES, CONTEXT_CONTRACT, EVENTS_SCHEMA, PINS, CHANGELOG (kit @ tag) and the ADR +
+REPORT (pilot @ sha) into `docs/`, generates the CLI reference from `adlc --help` of the pinned
+kit, and CI fails on drift (`make check`) and on any broken link (`mkdocs build --strict`).
+Original pages: PR loop, knowledge map, freshness, guardrails, workflows, pins/upgrades,
+catalog annotations, onboarding token, verdict, method, limits.
+**Onboarding without custom Backstage code.** Template `adlc-onboard` dispatches a workflow in
+the docs repo that runs `adlc init` on the target, lints, pushes a branch and opens the PR with
+the doctor output as body. Needs `ADLC_ONBOARD_TOKEN` (fine-grained, scoped to target repos)
+and `actions: write` for Backstage's own integration. Phase 2 (freshness card) deliberately
+not built: it must read the regress artifact, never reimplement `adlc stale`.
+**Review outcomes applied.** No copied docs without a drift check; version markers on the
+landing page rendered by sync (a first version healed the marker in check mode and could not
+fail; fixed and negative-tested); strict build in CI; owner group placeholder flagged in
+catalog-info; adoption claim restated with how it was measured.

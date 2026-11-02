@@ -10,3 +10,5 @@ repos/
 org/kestrel-project/.git/
 
 results/*.lock
+# independent Backstage docs repo (own history)
+adlc-backstage/

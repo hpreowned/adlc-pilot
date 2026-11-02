@@ -1,6 +1,6 @@
 # Moving the pilot to another Mac
 
-Six git repos, one tarball, one optional chat transcript. Everything else is rebuilt.
+Seven git repos, one tarball, one optional chat transcript. Everything else is rebuilt.
 
 ## Repos (all public, github.com/hpreowned)
 
@@ -12,8 +12,9 @@ Six git repos, one tarball, one optional chat transcript. Everything else is reb
 | `kestrel-web` | `repos/kestrel-web/` | TypeScript test subject |
 | `kestrel-ops` | `repos/kestrel-ops/` | ops test subject |
 | `kestrel-notify` | `repos/kestrel-notify/` | Python test subject, adoption-test target |
+| `adlc-backstage` | `adlc-backstage/` | Backstage TechDocs site, catalog entities, onboarding template; mirrors the kit at a pinned tag |
 
-The five inner repos are gitignored by the pilot so each keeps its own history.
+The six inner repos are gitignored by the pilot so each keeps its own history.
 `org/kestrel-project/` and `org/.github-private/` are plain directories tracked by the pilot.
 
 ## Restore
@@ -25,7 +26,7 @@ cd ~/ADLC && make bootstrap
 
 `make bootstrap` (`scripts/bootstrap.sh`) is idempotent and does, in order: Homebrew
 packages (openjdk@21, maven, node, uv, gh), Copilot CLI pinned to 1.0.105, .NET SDK 8 +
-runtime 10 into `.toolchain/dotnet`, clones the five inner repos, downloads the raw runs
+runtime 10 into `.toolchain/dotnet`, clones the six inner repos, downloads the raw runs
 from release `runs-2026-11-01` into `results/runs/`, `make kit` (venv + 73 tests), and
 `adlc doctor` on every Kestrel repo. Then `gh auth login` if needed; every `make tier*`
 target reads `COPILOT_GITHUB_TOKEN` from `gh auth token`. Nothing is written to `~`

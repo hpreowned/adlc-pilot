@@ -39,6 +39,7 @@ clone kestrel-services  repos/kestrel-services
 clone kestrel-web       repos/kestrel-web
 clone kestrel-ops       repos/kestrel-ops
 clone kestrel-notify    repos/kestrel-notify
+clone adlc-backstage    adlc-backstage
 
 step "raw runs (results/runs, gitignored; evidence behind every published number)"
 if [ ! -d results/runs ]; then
