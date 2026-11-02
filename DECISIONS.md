@@ -301,3 +301,19 @@ not built: it must read the regress artifact, never reimplement `adlc stale`.
 landing page rendered by sync (a first version healed the marker in check mode and could not
 fail; fixed and negative-tested); strict build in CI; owner group placeholder flagged in
 catalog-info; adoption claim restated with how it was measured.
+
+### 2026-11-02 — Backstage run locally; diagrams added
+**Verified locally** (Backstage 1.56 scaffolded app, Node 24, new frontend system): catalog
+loads System/Component/Resource/Group/Template from `adlc-backstage/catalog-info.yaml`; the
+onboarding template appears under Create; TechDocs builds with the local generator and
+renders all pages. GitHub Actions on `hpreowned` is locked for billing, so CI has not run;
+the identical steps (`make check`, `make build`) pass locally.
+**Diagrams.** Six Mermaid diagrams: PR-loop swimlane (sequence), onboarding sequence,
+freshness state machine, knowledge map, repo topology, eval pipeline. Source stays in
+markdown (GitHub renders it); Backstage renders via `backstage-plugin-techdocs-addon-mermaid`
+0.29.0, auto-discovered through its `/alpha` module; `mkdocs.yml` emits `<div class="mermaid">`
+via superfences; standalone `mkdocs serve` loads pinned mermaid 10.9.1 from CDN.
+**Two traps found and documented.** (1) A `file:` catalog location lets the local TechDocs
+builder patch `mkdocs.yml` inside the source tree; register by `url:`, or point a local demo
+at an rsync copy. (2) A Python venv inside the docs tree breaks TechDocs (symlinks outside
+the root); the Makefile takes `VENV=` outside the repo.

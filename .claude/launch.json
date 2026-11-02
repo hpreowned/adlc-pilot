@@ -3,7 +3,7 @@
   "configurations": [
     {
       "name": "adlc-techdocs",
-      "runtimeExecutable": "/Users/hpatil/ADLC/adlc-backstage/.venv/bin/mkdocs",
+      "runtimeExecutable": "/private/tmp/claude-501/-Users-hpatil-ADLC/a240cf7f-ac6b-4c86-9e88-be04e5c19c2c/scratchpad/techdocs-venv/bin/mkdocs",
       "runtimeArgs": ["serve", "-f", "/Users/hpatil/ADLC/adlc-backstage/mkdocs.yml", "-a", "127.0.0.1:8001"],
       "port": 8001
     },
