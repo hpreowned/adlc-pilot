@@ -41,6 +41,36 @@ judge output) is the evidence behind every number in `DECISION_ADR.md`. It is gi
 and shipped as `results-runs-2026-11-01.tgz` on the pilot's `runs-2026-11-01` release.
 Later eval batches: add a new release tag and bump `ADLC_RUNS_TAG` in the bootstrap call.
 
+## Backstage docs site (adlc-backstage)
+
+Cloned by bootstrap into `adlc-backstage/`. It is independent of the pilot: it mirrors the
+kit at the tag in its `kit.ref` and the pilot at a pinned SHA, and its CI fails on drift.
+
+Build the site alone (no Backstage needed):
+
+```bash
+cd ~/ADLC/adlc-backstage && make venv sync build VENV=/tmp/techdocs-venv
+```
+
+`VENV` must be outside the repo: a venv inside the tree breaks TechDocs (symlinks that point
+outside the source root). `make serve VENV=…` previews at localhost:8000 with diagrams.
+
+Run a local Backstage against it, if you want the catalog, template and TechDocs tab:
+
+1. `npx @backstage/create-app@latest` somewhere outside `~/ADLC` (Node 22 or 24, about 5 min).
+2. `yarn --cwd packages/app add backstage-plugin-techdocs-addon-mermaid@0.29.0` so the
+   diagrams render; the new frontend system discovers it, no code change.
+3. `app-config.local.yaml`: `techdocs.generator.runIn: local`, catalog rules allowing
+   `Group` and `Template`, and a `file:` location pointing at a **copy** of
+   `adlc-backstage/catalog-info.yaml` (`rsync -a --exclude .git --exclude .venv`). The local
+   builder patches `mkdocs.yml` inside a `file:` source tree; never point it at the checkout.
+4. Start with the TechDocs venv on `PATH`: `PATH=/tmp/techdocs-venv/bin:$PATH yarn start`,
+   then localhost:3000, guest sign-in.
+
+In a real Backstage register `catalog-info.yaml` by URL and skip steps 3 and 4. The
+onboarding template additionally needs `actions: write` on the docs repo for Backstage's
+GitHub integration and the `ADLC_ONBOARD_TOKEN` secret on the docs repo.
+
 ## Chat session (optional)
 
 The Claude Code session that built this lives at
