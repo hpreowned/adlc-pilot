@@ -317,3 +317,16 @@ via superfences; standalone `mkdocs serve` loads pinned mermaid 10.9.1 from CDN.
 builder patch `mkdocs.yml` inside the source tree; register by `url:`, or point a local demo
 at an rsync copy. (2) A Python venv inside the docs tree breaks TechDocs (symlinks outside
 the root); the Makefile takes `VENV=` outside the repo.
+
+### 2026-11-02 — `make tier3` on a fresh clone re-ran the whole tier, not the nine pending runs
+**Defect, mine.** The Makefile's tier targets passed `--out tier3.jsonl`; the committed file
+is `2026-10-30-tier3.jsonl`. `adlc eval` resumed only from its own `--out` file, so on a fresh
+clone it saw nothing done and started all 135 Tier 3 runs. I had told the owner to budget
+18 premium requests. Until the other machine's results are pushed, the real spend is
+unknown; worst case is about 270 premium requests (135 agent runs + 135 judge calls).
+**Fix.** Kit 0.1.8: resume scans every `results/*.jsonl`; the scorecard keeps the first valid
+record per `run_id` and lists later valid duplicates as superseded, never pooled, so the
+published numbers cannot move under an accidental re-run. Makefile tier targets no longer
+pass `--out`; eval writes `<date>.jsonl`. Tests added (76). Scorecard regenerated: unchanged.
+**Fold-in rule for the incoming file.** Only web-008's nine records are new information. The
+other 126, if present, appear in the scorecard as superseded duplicates with their run_ids.

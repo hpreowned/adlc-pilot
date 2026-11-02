@@ -38,19 +38,19 @@ tasks:
 	$(ADLC) eval --lint
 
 tier1:
-	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --runs 3 --results results --out tier1.jsonl
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --runs 3 --results results
 
 tier1-lean:        ## graphify-lean arm over Tier 1 (same tasks/judge as tier1)
-	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --arms graphify-lean --runs 3 --results results --out tier1-lean.jsonl
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --arms graphify-lean --runs 3 --results results
 
 tier1-serena-forced: ## serena-forced arm over Tier 1 (text search denied; Serena symbol tools only)
-	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --arms serena-forced --runs 3 --results results --out 2026-11-01-tier1-serena-forced.jsonl
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 1 --arms serena-forced --runs 3 --results results
 
 tier2:
-	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 2 --runs 3 --results results --out tier2.jsonl
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 2 --runs 3 --results results
 
 tier3:
-	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 3 --runs 3 --results results --out tier3.jsonl
+	$(ENV) COPILOT_GITHUB_TOKEN=$${COPILOT_GITHUB_TOKEN:-$$(gh auth token)} $(ADLC) eval --tier 3 --runs 3 --results results
 
 scorecard:
 	$(ADLC) scorecard --results results --out results/scorecard.md --html results/scorecard.html
