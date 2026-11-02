@@ -1,6 +1,6 @@
 # DECISION_ADR.md — repo-context layer for Copilot: adopt, and how
 
-Status: PROPOSED — all tiers complete (315 runs attempted, 306 valid, 2026-10-30). Numbers are
+Status: PROPOSED — all tiers complete (411 runs attempted, 378 valid, 2026-11-01; nine web-008 Tier 3 reruns pending, see Not-completed). Numbers are copied from `results/scorecard.md` (reproduce: `make tier1 tier2 tier3 scorecard`).
 copied from `results/scorecard.md` (reproduce: `make tier1 tier2 tier3 scorecard`).
 
 ## Context
